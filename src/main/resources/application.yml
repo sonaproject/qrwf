@@ -1,0 +1,57 @@
+server:
+  port: 8080
+  tomcat:
+    basedir: ./
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+    session:
+      timeout: 60m
+spring:
+  data:
+    elasticsearch:
+      repositories:
+        enabled: true
+  main:
+    allow-circular-references: true
+    allow-bean-definition-overriding: true
+  application:
+    name: astroweb
+  freemarker:
+    suffix: .ftl
+    cache: false
+  datasource:
+    url: jdbc:h2:file:~/astrologger/data
+    username: astrologger
+    password: astr123#
+    driverClassName: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+  h2:
+    console:
+      path: /h2-console
+      settings.trace: false
+      settings.web-allow-others: false
+      enabled: true
+  cache:
+    jcache:
+      config: classpath:config/ehcache.xml
+  config:
+    import:
+      - config/language.yml
+      - config/AnsibleConfig.yml
+      - config/platform.yml
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          elasticsearch:
+            client: DEBUG
+      elasticsearch:
+        client:
+          RestClient: DEBUG
