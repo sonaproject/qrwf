@@ -27,7 +27,7 @@ management:
       exposure:
         include: "*"
 influx:
-  url: http://3.38.92.36:8086
+  url: http://127.0.0.1:8086 # 127.0.0.1 3.38.92.36
   username: astro
   password: astro123
   token: S8gSyPrZ22cZv-n_JiRCK_eU83ShrPFxB4N4pHS-Xfxglr_ktHYa3SLtDK4g7QvdAqxHMOZCwaPzZZzLOhjMJw==
