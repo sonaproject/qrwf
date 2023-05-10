@@ -102,7 +102,7 @@ public class MonitoringService {
         }catch (Exception e){
             log.error(e.getMessage());
         }
-
+        log.debug("metric: {}",this.gson.toJson(result));
         return result;
     }
 }
