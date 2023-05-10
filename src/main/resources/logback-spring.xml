@@ -7,9 +7,9 @@
         </encoder>
     </appender>
     <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOGS_ABSOLUTE_PATH}/logs/astroweb.log</file>
+        <file>${LOGS_ABSOLUTE_PATH}/logs/qrwf.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOGS_ABSOLUTE_PATH}/logs/astroweb.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+            <fileNamePattern>${LOGS_ABSOLUTE_PATH}/logs/qrwf.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
             <maxHistory>10</maxHistory>
         </rollingPolicy>
         <encoder>
@@ -19,13 +19,13 @@
         </encoder>
     </appender>
 
-    <logger name="com.skt.astroweb" level="debug">
+    <logger name="com.goblin" level="debug">
         <appender-ref ref="file"/>
     </logger>
     <logger name="org.springframework" level="error">
         <appender-ref ref="console"/>
     </logger>
-    <logger name="org.elasticsearch.client.RestClient" level="debug">
+    <logger name="io.micrometer" level="info">
         <appender-ref ref="console"/>
     </logger>
 </configuration>

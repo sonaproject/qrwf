@@ -10,48 +10,31 @@ server:
     session:
       timeout: 60m
 spring:
-  data:
-    elasticsearch:
-      repositories:
-        enabled: true
   main:
     allow-circular-references: true
     allow-bean-definition-overriding: true
   application:
-    name: astroweb
+    name: qrwf
   freemarker:
     suffix: .ftl
-    cache: false
-  datasource:
-    url: jdbc:h2:file:~/astrologger/data
-    username: astrologger
-    password: astr123#
-    driverClassName: org.h2.Driver
-  jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-    hibernate:
-      ddl-auto: update
-  h2:
-    console:
-      path: /h2-console
-      settings.trace: false
-      settings.web-allow-others: false
-      enabled: true
-  cache:
-    jcache:
-      config: classpath:config/ehcache.xml
-  config:
-    import:
-      - config/language.yml
-      - config/AnsibleConfig.yml
-      - config/platform.yml
-logging:
-  level:
-    org:
-      springframework:
-        data:
-          elasticsearch:
-            client: DEBUG
-      elasticsearch:
-        client:
-          RestClient: DEBUG
+    cache: true
+management:
+  endpoints:
+    web:
+      base-path: /management
+      path-mapping:
+        health: health_check
+      exposure:
+        include: "*"
+influx:
+  url: http://3.38.92.36:8086
+  username: astro
+  password: astro123
+  token: S8gSyPrZ22cZv-n_JiRCK_eU83ShrPFxB4N4pHS-Xfxglr_ktHYa3SLtDK4g7QvdAqxHMOZCwaPzZZzLOhjMJw==
+  org: edgecloud
+  bucket: actuator
+  logLevel: BODY # The log level for logging the HTTP request and HTTP response. (Default: NONE)
+  readTimeout: 5s # Read timeout for OkHttpClient. (Default: 10s)
+  writeTimeout: 5s # Write timeout for OkHttpClient. (Default: 10s)
+  connectTimeout: 5s # Connection timeout for OkHttpClient. (Default: 10s)
+
