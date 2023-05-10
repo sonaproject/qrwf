@@ -72,10 +72,12 @@ public class MonitoringService {
                     .time(Instant.now(), WritePrecision.NS));
         }
         try (WriteApi writeApi = client.getWriteApi()) {
-            log.debug("Start save data: {}",points.size());
             for (Point point : points) {
                 writeApi.writePoint(bucket, org, point);
             }
+            writeApi.flush();
+            writeApi.close();
+            log.debug("end save data: {}",points.size());
         } catch (Exception e) {
            log.error(e.getMessage());
         }
