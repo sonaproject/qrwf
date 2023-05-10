@@ -85,14 +85,20 @@ public class MonitoringService {
     public ArrayList<ActuatorDto> getMetrics(){
         ArrayList<ActuatorDto> result = new ArrayList<>();
         RestTemplate restTemplate = new RestTemplate();
+        String[] metricName = {"jvm.memory.used","jvm.memory.committed","jvm.gc.memory.allocated","jvm.gc.memory.promoted"};
         try {
-            String[] metricName = {"jvm.memory.used","jvm.memory.committed","jvm.gc.memory.allocated","jvm.gc.memory.promoted","process.cpu.usage"};
 
             for(String metric: metricName){
-                ResponseEntity<String> response = restTemplate.getForEntity("http://localhost:8080/management/metrics/"+metric, String.class);
-                String healthData = response.getBody();
-                JvmMetricDto data = gson.fromJson(healthData,JvmMetricDto.class);
-                result.add(ActuatorDto.builder().name(metric).value(data.getMeasurements().get(0).getValue()).build());
+                try {
+                    ResponseEntity<String> response = restTemplate.getForEntity("http://127.0.0.1:8080/management/metrics/"+metric, String.class);
+                    String healthData = response.getBody();
+                    JvmMetricDto data = gson.fromJson(healthData,JvmMetricDto.class);
+                    result.add(ActuatorDto.builder().name(metric).value(data.getMeasurements().get(0).getValue()).build());
+                }catch (Exception e){
+                    log.error("error name:{}",metric);
+                    continue;
+                }
+
             }
         }catch (Exception e){
             log.error(e.getMessage());
