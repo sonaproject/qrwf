@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.lang.management.MemoryMXBean;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +23,9 @@ import com.influxdb.client.WriteApi;
 import com.influxdb.client.domain.WritePrecision;
 import com.influxdb.client.write.Point;
 import org.springframework.web.client.RestTemplate;
+
+import java.lang.management.ManagementFactory;
+import java.lang.management.OperatingSystemMXBean;
 
 /**
  * packageName : com.goblin.qrwf
@@ -87,6 +92,8 @@ public class MonitoringService {
     public ArrayList<ActuatorDto> getMetrics(){
         ArrayList<ActuatorDto> result = new ArrayList<>();
         RestTemplate restTemplate = new RestTemplate();
+
+        // JVM
         String[] metricName = {"jvm.memory.used","jvm.memory.committed","jvm.gc.memory.allocated","jvm.gc.memory.promoted"};
         try {
             for(String metric: metricName){
@@ -96,13 +103,37 @@ public class MonitoringService {
                     JvmMetricDto data = gson.fromJson(healthData,JvmMetricDto.class);
                     result.add(ActuatorDto.builder().name(metric).value(data.getMeasurements().get(0).getValue()).build());
                 }catch (Exception e){
-                    log.error("error name:{}",metric);
+                    log.error("jvm monitoring error name:{}",metric);
                     continue;
                 }
 
             }
         }catch (Exception e){
             log.error(e.getMessage());
+        }
+        //CPU, MEM
+        try{
+            OperatingSystemMXBean osBean = ManagementFactory.getOperatingSystemMXBean();
+            double systemLoadAverage = osBean.getSystemLoadAverage();
+
+            int processors = osBean.getAvailableProcessors();
+            double cpuUsage = systemLoadAverage / processors;
+            long cpuUsagePercent = (long)(cpuUsage * 100);
+
+            result.add(ActuatorDto.builder().name("cpu.usage.percent").value(cpuUsagePercent).build());
+
+
+            MemoryMXBean memoryBean = ManagementFactory.getMemoryMXBean();
+            long usedMemory = memoryBean.getHeapMemoryUsage().getUsed();
+            long maxMemory = memoryBean.getHeapMemoryUsage().getMax();
+            long memoryUsage = (long) usedMemory / maxMemory * 100;
+
+            result.add(ActuatorDto.builder().name("memory.usage").value(usedMemory).build());
+            result.add(ActuatorDto.builder().name("memory.max").value(maxMemory).build());
+            result.add(ActuatorDto.builder().name("memory.usage.percent").value(memoryUsage).build());
+
+        }catch (Exception e){
+            log.error("cpu,mem monitoring error:{}",e.getMessage());
         }
         log.debug("metric: {}",this.gson.toJson(result));
         return result;
