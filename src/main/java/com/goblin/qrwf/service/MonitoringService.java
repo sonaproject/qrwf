@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.lang.management.MemoryMXBean;
@@ -137,5 +138,37 @@ public class MonitoringService {
         }
         log.debug("metric: {}",this.gson.toJson(result));
         return result;
+    }
+
+    /**
+     *
+     * @param duration
+     */
+    @Async
+    public void CPULoadGenerator(long duration) {
+        long startTime = System.currentTimeMillis();
+        while (System.currentTimeMillis() - startTime < duration) {
+            for (int i = 0; i < 100000; i++) {
+                Math.sqrt(i);
+            }
+        }
+    }
+
+    /**
+     *
+     * @param duration : sec
+     */
+    @Async
+    public void MEMORYLoadGenerator(long duration) {
+        int elementSize = 1024;
+        int numElements = 100000;
+        long startTime = System.currentTimeMillis();
+
+        List<byte[]> memoryList = new ArrayList<>();
+
+        while (System.currentTimeMillis() - startTime < duration) {
+            byte[] element = new byte[elementSize];
+            memoryList.add(element);
+        }
     }
 }

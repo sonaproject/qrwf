@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * packageName : com.goblin.qrwf.controller
@@ -35,5 +33,24 @@ public class PageController {
     public String monitoring() {
         log.debug("Monitoring Run~");
         return monitoringService.writerMetric();
+    }
+
+    /**
+     *
+     * @param type
+     * @param duration
+     * @return
+     */
+    @GetMapping("/loadGenerator/type/duration")
+    public String clusterTableData(@PathVariable("type") String type,@PathVariable("duration") long duration) {
+        String result = "";
+
+        if(type.equals("cpu")){
+            monitoringService.CPULoadGenerator(duration);
+        }else{
+            monitoringService.MEMORYLoadGenerator(duration);
+        }
+        result = type + "Load generation proceeds for "+duration+" seconds.";
+        return result;
     }
 }
