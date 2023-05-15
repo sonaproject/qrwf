@@ -121,6 +121,7 @@ public class MonitoringService {
             double cpuUsage = systemLoadAverage / processors;
             long cpuUsagePercent = (long)(cpuUsage * 100);
 
+            result.add(ActuatorDto.builder().name("cpu.usage.loadAvg").value((long)systemLoadAverage).build());
             result.add(ActuatorDto.builder().name("cpu.usage.percent").value(cpuUsagePercent).build());
 
 
