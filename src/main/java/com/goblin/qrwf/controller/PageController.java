@@ -3,6 +3,7 @@ package com.goblin.qrwf.controller;
 import com.goblin.qrwf.service.MonitoringService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,15 +43,16 @@ public class PageController {
      * @return
      */
     @GetMapping("/loadGenerator/{type}/{duration}")
-    public String clusterTableData(@PathVariable("type") String type,@PathVariable("duration") long duration) {
+    public ResponseEntity<String> clusterTableData(@PathVariable("type") String type, @PathVariable("duration") long duration) {
         String result = "";
-
+        log.debug("loader start: type-{},duration-{}",type,duration);
         if(type.equals("cpu")){
-            monitoringService.CPULoadGenerator(duration);
+         //   monitoringService.CPULoadGenerator(duration);
         }else{
-            monitoringService.MEMORYLoadGenerator(duration);
+         //   monitoringService.MEMORYLoadGenerator(duration);
         }
         result = type + "Load generation proceeds for "+duration+" seconds.";
-        return result;
+        return ResponseEntity.ok(result);
+
     }
 }
