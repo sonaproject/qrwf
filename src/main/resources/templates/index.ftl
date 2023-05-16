@@ -108,7 +108,6 @@
             url: "/loadGenerator/cpu/180",
             type: "GET",
             dataType: "text",
-
             success: function(data) {
                 $("#loaderResultdiv").html(data);
             },
@@ -122,6 +121,7 @@
         $.ajax({
             url: "/loadGenerator/mem/180",
             type: "GET",
+            dataType: "text",
             success: function(data) {
                 $("#loaderResultdiv").html(data);
             },
