@@ -47,9 +47,9 @@ public class PageController {
         String result = "";
         log.debug("loader start: type-{},duration-{}",type,duration);
         if(type.equals("cpu")){
-         //   monitoringService.CPULoadGenerator(duration);
+            monitoringService.CPULoadGenerator(duration);
         }else{
-         //   monitoringService.MEMORYLoadGenerator(duration);
+            monitoringService.MEMORYLoadGenerator(duration);
         }
         result = type + "Load generation proceeds for "+duration+" seconds.";
         return ResponseEntity.ok(result);
