@@ -41,7 +41,7 @@ public class PageController {
      * @param duration
      * @return
      */
-    @GetMapping("/loadGenerator/type/duration")
+    @GetMapping("/loadGenerator/{type}/{duration}")
     public String clusterTableData(@PathVariable("type") String type,@PathVariable("duration") long duration) {
         String result = "";
 

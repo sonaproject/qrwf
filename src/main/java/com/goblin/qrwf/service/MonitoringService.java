@@ -14,6 +14,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.lang.management.MemoryMXBean;
+import java.net.InetAddress;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +57,7 @@ public class MonitoringService {
     @Autowired
     private Gson gson;
 
+
     @PostConstruct
     public void init(){
         this.client = InfluxDBClientFactory.create(this.url, this.token.toCharArray());
@@ -74,6 +76,7 @@ public class MonitoringService {
         for(ActuatorDto data: list){
             points.add(Point.measurement("monitoring")
                     .addTag("service", "qrwf")
+                    .addField("ipaddress",getLocalHost())
                     .addField(data.getName(), data.getValue())
                     .time(Instant.now(), WritePrecision.NS));
         }
@@ -130,6 +133,7 @@ public class MonitoringService {
             long maxMemory = memoryBean.getHeapMemoryUsage().getMax();
             long memoryUsage = (long) usedMemory / maxMemory * 100;
 
+
             result.add(ActuatorDto.builder().name("memory.usage").value(usedMemory).build());
             result.add(ActuatorDto.builder().name("memory.max").value(maxMemory).build());
             result.add(ActuatorDto.builder().name("memory.usage.percent").value(memoryUsage).build());
@@ -141,6 +145,16 @@ public class MonitoringService {
         return result;
     }
 
+    public String getLocalHost(){
+        String result = "0.0.0.0";
+        try {
+            InetAddress localHost = InetAddress.getLocalHost();
+            result = localHost.getHostAddress();
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        return result;
+    }
     /**
      *
      * @param duration
@@ -148,9 +162,10 @@ public class MonitoringService {
     @Async
     public void CPULoadGenerator(long duration) {
         long startTime = System.currentTimeMillis();
-        while (System.currentTimeMillis() - startTime < duration) {
+        while (System.currentTimeMillis() - startTime < (duration*1000)) {
             for (int i = 0; i < 100000; i++) {
                 Math.sqrt(i);
+                log.debug("CPULoadGenerator cont: {}",i);
             }
         }
     }
@@ -167,9 +182,11 @@ public class MonitoringService {
 
         List<byte[]> memoryList = new ArrayList<>();
 
-        while (System.currentTimeMillis() - startTime < duration) {
+        int count = 0;
+        while (System.currentTimeMillis() - startTime < (duration*1000)) {
             byte[] element = new byte[elementSize];
             memoryList.add(element);
+            log.debug("MEMORYLoadGenerator cont: {}",count++);
         }
     }
 }
