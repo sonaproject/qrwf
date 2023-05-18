@@ -85,10 +85,18 @@ public class MonitoringService {
         List<String> lines = new ArrayList<>();
 
         try {
-            File file    =  new File("src/main/resources/data/test.log");
-            BufferedReader reader  =  new BufferedReader(new InputStreamReader(new FileInputStream(file),"euc-kr"));
+            /*File file    =  new File("./data/test.log");
+            BufferedReader reader  =  new BufferedReader(new InputStreamReader(new FileInputStream(file),"euc-kr"));*/
+            // ClassPathResource를 사용하여 classpath에 있는 파일 리소스를 가져옵니다.
+            Resource resource = new ClassPathResource("data/test.log");
+
+            // 파일 리소스의 InputStream을 가져와서 문자열로 변환합니다.
+            InputStreamReader reader = new InputStreamReader(resource.getInputStream(), "euc-kr");
+            BufferedReader bufferedReader = new BufferedReader(reader);
+
+
             String line;
-            while ((line = reader.readLine()) != null) {
+            while ((line = bufferedReader.readLine()) != null) {
                 lines.add(line);
             }
         }catch (Exception e){
