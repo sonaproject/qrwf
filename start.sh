@@ -7,4 +7,4 @@ pkill -f $NAME
 
 echo ">>>>> Start $NAME"
 
-nohup java -XX:+UseG1GC -Dlog4j2.formatMsgNoLookups=true /home/ec2-user/qrwf/$NAME > output.log 2>&1 &
+nohup java -XX:+UseG1GC -Dlog4j2.formatMsgNoLookups=true -jar /home/ec2-user/qrwf/$NAME > output.log 2>&1 &

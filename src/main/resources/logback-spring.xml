@@ -14,7 +14,7 @@
         </rollingPolicy>
         <encoder>
             <pattern>
-                ▶ %-5level %d{yyyy-MM-dd HH:mm:ss} %logger{15}[%method:%line] - %msg%n
+                %msg%n
             </pattern>
         </encoder>
     </appender>

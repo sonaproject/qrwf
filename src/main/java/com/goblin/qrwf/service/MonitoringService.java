@@ -9,12 +9,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.core.io.ClassPathResource;
 
+
+import java.io.*;
 import java.lang.management.MemoryMXBean;
 import java.net.InetAddress;
+import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,10 +29,12 @@ import com.influxdb.client.InfluxDBClientFactory;
 import com.influxdb.client.WriteApi;
 import com.influxdb.client.domain.WritePrecision;
 import com.influxdb.client.write.Point;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.client.RestTemplate;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.OperatingSystemMXBean;
+import java.util.Random;
 
 /**
  * packageName : com.goblin.qrwf
@@ -57,14 +64,38 @@ public class MonitoringService {
     @Autowired
     private Gson gson;
 
+    private List<String> logLine;
+
 
     @PostConstruct
     public void init(){
         this.client = InfluxDBClientFactory.create(this.url, this.token.toCharArray());
+        this.logLine = this.getRandomLineFromClasspath();
     }
     @PreDestroy
     public void cleanup() {
         this.client.close();
+    }
+
+    /**
+     *
+     * @return
+     */
+    public List<String> getRandomLineFromClasspath(){
+        List<String> lines = new ArrayList<>();
+
+        try {
+            File file    =  new File("src/main/resources/data/test.log");
+            BufferedReader reader  =  new BufferedReader(new InputStreamReader(new FileInputStream(file),"euc-kr"));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                lines.add(line);
+            }
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        log.debug("Get Line Count: {}",lines.size());
+        return lines;
     }
     /**
      *
@@ -187,6 +218,22 @@ public class MonitoringService {
             byte[] element = new byte[elementSize];
             memoryList.add(element);
             log.debug("MEMORYLoadGenerator cont: {}",count++);
+        }
+    }
+
+    /**
+     *
+     * @return
+     */
+    public  void getRandomLineFromFile() {
+        try{
+            if (!this.logLine.isEmpty()) {
+                Random random = new Random();
+                int randomIndex = random.nextInt(this.logLine.size());
+                log.info(this.logLine.get(randomIndex));
+            }
+        }catch (Exception e){
+            log.error(e.getMessage());
         }
     }
 }

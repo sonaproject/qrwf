@@ -31,11 +31,15 @@ public class PageController {
 
 
     @Scheduled(cron="0 0/1 * * * *")
-    public String monitoring() {
+    public void monitoring() {
         log.debug("Monitoring Run~");
-        return monitoringService.writerMetric();
+        monitoringService.writerMetric();
     }
 
+    @Scheduled(cron="0/30 * * * * *")
+    public void randomLog() {
+        monitoringService.getRandomLineFromFile();
+    }
     /**
      *
      * @param type
