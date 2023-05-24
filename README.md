@@ -23,21 +23,15 @@ java --version
 ### _2. Install Gradle for your OS_
 
 ------------
-#### Ubuntu
 
 ```bash
-sudo apt update
-sudo apt install gradle -y
-gradle --version
-
-```
-
-#### CentOS
-
-```bash
-sudo yum install epel-release -y
-sudo yum install gradle -y
-gradle --version
+wget https://services.gradle.org/distributions/gradle-7.6-bin.zip -P /tmp
+sudo unzip -d /opt/gradle /tmp/gradle-7.6-bin.zip
+sudo touch /etc/profile.d/gradle.sh
+echo 'export PATH=/opt/gradle/gradle-7.6/bin:$PATH' | sudo tee /etc/profile.d/gradle.sh
+sudo chmod +x /etc/profile.d/gradle.sh
+source /etc/profile.d/gradle.sh
+gradle
 ```
 
 ### _3. Compiling with Gradle_
