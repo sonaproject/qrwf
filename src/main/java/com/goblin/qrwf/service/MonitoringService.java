@@ -114,7 +114,7 @@ public class MonitoringService {
 
         for(ActuatorDto data: list){
             points.add(Point.measurement("monitoring")
-                    .addTag("service", "qrwf")
+                  //  .addTag("service", "qrwf")
                     .addTag("ipaddress",getLocalHost())
                     .addField(data.getName(), data.getValue())
                     .time(Instant.now(), WritePrecision.NS));
