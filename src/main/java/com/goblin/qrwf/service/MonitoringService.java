@@ -59,6 +59,9 @@ public class MonitoringService {
     @Value("${influx.url}")
     private String url;
 
+    @Value("${server.port}")
+    private String server_port;
+
     private InfluxDBClient client;
 
     @Autowired
@@ -141,7 +144,7 @@ public class MonitoringService {
         try {
             for(String metric: metricName){
                 try {
-                    ResponseEntity<String> response = restTemplate.getForEntity("http://localhost:8080/management/metrics/"+metric, String.class);
+                    ResponseEntity<String> response = restTemplate.getForEntity("http://localhost:"+server_port+"/management/metrics/"+metric, String.class);
                     String healthData = response.getBody();
                     JvmMetricDto data = gson.fromJson(healthData,JvmMetricDto.class);
                     result.add(ActuatorDto.builder().name(metric).value(data.getMeasurements().get(0).getValue()).build());
