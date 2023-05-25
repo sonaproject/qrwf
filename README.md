@@ -1,6 +1,6 @@
 # Getting Started
 
-### _1. Install OpenJDK17 for your OS_
+### _1. Install OpenJDK17, Gradle for your OS_
 
 ------------
 
@@ -11,6 +11,9 @@ sudo apt update -y
 sudo apt install openjdk-17-jdk -y
 java --version
 
+sudo apt install gradle
+gradle --version
+
 ```
 
 #### CentOS
@@ -18,23 +21,13 @@ java --version
 ```bash
 sudo yum install java-17-openjdk -y
 java --version
+
+sudo yum install gradle -y
+gradle --version
 ```
 
-### _2. Install Gradle for your OS_
 
-------------
-
-```bash
-wget https://services.gradle.org/distributions/gradle-7.6-bin.zip -P /tmp
-sudo unzip -d /opt/gradle /tmp/gradle-7.6-bin.zip
-sudo touch /etc/profile.d/gradle.sh
-echo 'export PATH=/opt/gradle/gradle-7.6/bin:$PATH' | sudo tee /etc/profile.d/gradle.sh
-sudo chmod +x /etc/profile.d/gradle.sh
-source /etc/profile.d/gradle.sh
-gradle
-```
-
-### _3. Compiling with Gradle_
+### _2. Compiling with Gradle_
 
 ------------
 ```bash
@@ -43,7 +36,7 @@ cd qrwf
 ./gradlew clean build
 ```
 
-### _4. Run compiled file_
+### _3. Run compiled file_
 
 ------------
 
