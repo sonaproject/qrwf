@@ -46,7 +46,7 @@ gradle --version
 ```bash
 git clone https://github.com/sonaproject/qrwf.git
 cd qrwf
-gradle clean build
+./gradlew clean build
 ```
 
 ### _4. Run compiled file_
