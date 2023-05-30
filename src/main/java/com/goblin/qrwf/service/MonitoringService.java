@@ -67,13 +67,13 @@ public class MonitoringService {
     @Autowired
     private Gson gson;
 
-    private List<String> logLine;
+   // private List<String> logLine;
 
 
     @PostConstruct
     public void init(){
         this.client = InfluxDBClientFactory.create(this.url, this.token.toCharArray());
-        this.logLine = this.getRandomLineFromClasspath();
+        //this.logLine = this.getRandomLineFromClasspath();
     }
     @PreDestroy
     public void cleanup() {
@@ -84,12 +84,12 @@ public class MonitoringService {
      *
      * @return
      */
-    public List<String> getRandomLineFromClasspath(){
+    /*public List<String> getRandomLineFromClasspath(){
         List<String> lines = new ArrayList<>();
 
         try {
-            /*File file    =  new File("./data/test.log");
-            BufferedReader reader  =  new BufferedReader(new InputStreamReader(new FileInputStream(file),"euc-kr"));*/
+            *//*File file    =  new File("./data/test.log");
+            BufferedReader reader  =  new BufferedReader(new InputStreamReader(new FileInputStream(file),"euc-kr"));*//*
             // ClassPathResource를 사용하여 classpath에 있는 파일 리소스를 가져옵니다.
             Resource resource = new ClassPathResource("data/test.log");
 
@@ -107,7 +107,7 @@ public class MonitoringService {
         }
         log.debug("Get Line Count: {}",lines.size());
         return lines;
-    }
+    }*/
     /**
      *
      */
@@ -239,7 +239,7 @@ public class MonitoringService {
      *
      * @return
      */
-    public  void getRandomLineFromFile() {
+    /*public  void getRandomLineFromFile() {
         try{
             if (!this.logLine.isEmpty()) {
                 Random random = new Random();
@@ -248,6 +248,28 @@ public class MonitoringService {
             }
         }catch (Exception e){
             log.error(e.getMessage());
+        }
+    }*/
+
+    /**
+     *
+     * @throws Exception
+     */
+    public  void generateRandomException() throws Exception {
+        Random random = new Random();
+        int exceptionCode = random.nextInt(6);
+
+        switch (exceptionCode) {
+            case 0:
+                throw new NullPointerException("Null pointer exception occurred.");
+            case 1:
+                throw new IllegalArgumentException("Illegal argument exception occurred.");
+            case 2:
+                throw new UnsupportedOperationException("Unsupported operation exception occurred.");
+            case 3:
+                throw new ArrayIndexOutOfBoundsException("Array index out of bounds exception occurred.");
+            case 4:
+                throw new ArithmeticException("Arithmetic exception occurred.");
         }
     }
 }
