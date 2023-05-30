@@ -33,24 +33,17 @@ sudo chmod +x /etc/profile.d/gradle.sh
 source /etc/profile.d/gradle.sh
 gradle
 ```
-### _3. Run compiled file_
+
+### _3. Build
+```bash
+# ./gradlew clean build
+```
+### _4. Run compiled file_
 
 ------------
 
 ```bash
-# -Dinflux.url --> influxDB IP:PORT you are using
-# -Dinflux.username --> influxDB username you are using
-# -Dinflux.password --> influxDB password you are using
-# -Dinflux.token --> influxDB token you are using
-# -Dinflux.org --> influxDB org you are using
-nohup java -jar qrwf-1.0.jar \
-      -XX:+UseG1GC \
-      -Dlog4j2.formatMsgNoLookups=true \ 
-      -Dinflux.url=10.10.10.10:8086 \ 
-      -Dinflux.username=xxx  
-      -Dinflux.password=xxx \
-      -Dinflux.token=xxx \
-      -Dinflux.org=xxx > output.log 2>&1 &
+# ./start.sh
 ```
 
 ### _5. How to check logs_
