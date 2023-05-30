@@ -1,7 +1,7 @@
 #!/bin/bash
 
 source_file="$1"
-destination_dir="/home/ec2-user/qrwf/"
+destination_dir="/home/ubuntu/qrwf/"
 
 if [ -f "$source_file" ]; then
   cp "$source_file" "$destination_dir"
@@ -17,4 +17,4 @@ pkill -f $NAME
 
 echo ">>>>> Start $NAME"
 
-nohup java -XX:+UseG1GC -Dlog4j2.formatMsgNoLookups=true -jar /home/ec2-user/qrwf/$NAME > output.log 2>&1 &
+nohup java -XX:+UseG1GC -Dlog4j2.formatMsgNoLookups=true -jar /home/ubuntu/qrwf/build/libs/$NAME > output.log 2>&1 &
