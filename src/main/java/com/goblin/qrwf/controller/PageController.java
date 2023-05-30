@@ -36,10 +36,10 @@ public class PageController {
         monitoringService.writerMetric();
     }
 
-    @Scheduled(cron="0/30 * * * * *")
+    /*@Scheduled(cron="0/30 * * * * *")
     public void randomLog() {
         monitoringService.getRandomLineFromFile();
-    }
+    }*/
     /**
      *
      * @param type

@@ -117,8 +117,7 @@ public class MonitoringService {
 
         for(ActuatorDto data: list){
             points.add(Point.measurement("monitoring")
-                  //  .addTag("service", "qrwf")
-                    .addTag("ipaddress",getLocalHost())
+                    .addTag("service", getLocalHost())
                     .addField(data.getName(), data.getValue())
                     .time(Instant.now(), WritePrecision.NS));
         }
@@ -128,13 +127,17 @@ public class MonitoringService {
             }
             writeApi.flush();
             writeApi.close();
-            log.debug("end save data: {}",points.size());
+            log.debug("end save data: {}",points.toString());
         } catch (Exception e) {
            log.error(e.getMessage());
         }
         return String.valueOf(points.size());
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<ActuatorDto> getMetrics(){
         ArrayList<ActuatorDto> result = new ArrayList<>();
         RestTemplate restTemplate = new RestTemplate();
