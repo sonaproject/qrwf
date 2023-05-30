@@ -27,7 +27,7 @@ management:
       exposure:
         include: "*"
 influx:
-  url: http://127.0.0.1:8086 # 127.0.0.1 3.38.92.36
+  url: http://10.0.0.243:8086 # 127.0.0.1 3.38.92.36
   username: edgecloud
   password: edge123!
   token: wsRkPDMrs0Vnu2RFU-IkFEBPxtgwqPGVD7clS3iMr9qOXrQynw0PTcMbQh7sOmLcLcJvf4-wcl1PtvZrYDSGiw==
