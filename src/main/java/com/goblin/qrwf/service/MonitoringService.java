@@ -73,7 +73,8 @@ public class MonitoringService {
     @PostConstruct
     public void init(){
         this.client = InfluxDBClientFactory.create(this.url, this.token.toCharArray());
-        this.logLine = this.getRandomLineFromClasspath();
+        log.debug("InfluxDB Server : {}",this.url);
+       // this.logLine = this.getRandomLineFromClasspath();
     }
     @PreDestroy
     public void cleanup() {
