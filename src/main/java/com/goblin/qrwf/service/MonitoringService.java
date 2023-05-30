@@ -220,7 +220,7 @@ public class MonitoringService {
      */
     @Async
     public void MEMORYLoadGenerator(long duration) {
-        int elementSize = 512;
+        int elementSize = 32;
         int numElements = 100000;
         long startTime = System.currentTimeMillis();
 

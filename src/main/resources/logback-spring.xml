@@ -23,10 +23,10 @@
         <appender-ref ref="file"/>
     </logger>
     <logger name="org.springframework" level="error">
-        <appender-ref ref="console"/>
+        <appender-ref ref="file"/>
     </logger>
     <logger name="io.micrometer" level="info">
-        <appender-ref ref="console"/>
+        <appender-ref ref="file"/>
     </logger>
 </configuration>
 
