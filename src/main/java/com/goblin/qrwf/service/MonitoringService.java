@@ -127,7 +127,7 @@ public class MonitoringService {
             }
             writeApi.flush();
             writeApi.close();
-            log.debug("end save data: {}",points.toString());
+
         } catch (Exception e) {
            log.error(e.getMessage());
         }
