@@ -21,6 +21,7 @@
     </style>
 </head>
 <body  class=" border-top-wide border-primary d-flex flex-column" id="bodyDiv">
+<input type="hidden" id="hostName" value="${host}" />
 <div class="page page-center">
     <div class="container-tight">
         <div class="row">

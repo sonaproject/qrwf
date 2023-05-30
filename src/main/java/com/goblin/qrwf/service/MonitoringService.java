@@ -210,7 +210,6 @@ public class MonitoringService {
         while (System.currentTimeMillis() - startTime < (duration*1000)) {
             for (int i = 0; i < 100000; i++) {
                 Math.sqrt(i);
-                log.debug("CPULoadGenerator cont: {}",i);
             }
         }
     }
@@ -231,7 +230,6 @@ public class MonitoringService {
         while (System.currentTimeMillis() - startTime < (duration*1000)) {
             byte[] element = new byte[elementSize];
             memoryList.add(element);
-            log.debug("MEMORYLoadGenerator cont: {}",count++);
         }
     }
 
