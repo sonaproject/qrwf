@@ -229,6 +229,10 @@ public class MonitoringService {
         while (System.currentTimeMillis() - startTime < (duration*1000)) {
             byte[] element = new byte[elementSize];
             memoryList.add(element);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+            }
         }
     }
 
