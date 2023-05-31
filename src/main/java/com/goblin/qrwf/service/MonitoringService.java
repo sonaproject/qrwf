@@ -220,12 +220,8 @@ public class MonitoringService {
     public void CPULoadGenerator(long duration) {
         long startTime = System.currentTimeMillis();
         while (System.currentTimeMillis() - startTime < (duration*1000)) {
-            for (int i = 0; i < 100000; i++) {
+            for (int i = 0; i < 10000; i++) {
                 Math.sqrt(i);
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                }
             }
         }
     }
