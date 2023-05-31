@@ -21,6 +21,8 @@ import java.lang.management.MemoryMXBean;
 import java.net.InetAddress;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -109,10 +111,20 @@ public class MonitoringService {
         log.debug("Get Line Count: {}",lines.size());
         return lines;
     }*/
+
+    public String notDate() {
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDateTime = now.format(formatter);
+        return  formattedDateTime;
+    }
+
     /**
      *
      */
+
     public String writerMetric(){
+        log.debug("Monitoring start.. {}",notDate());
         ArrayList<ActuatorDto> list = this.getMetrics();
         List<Point> points = new ArrayList<>();
 
@@ -132,6 +144,7 @@ public class MonitoringService {
         } catch (Exception e) {
            log.error(e.getMessage());
         }
+        log.debug("Monitoring end.. {}",notDate());
         return String.valueOf(points.size());
     }
 
