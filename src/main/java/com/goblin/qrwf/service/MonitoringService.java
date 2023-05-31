@@ -262,15 +262,15 @@ public class MonitoringService {
 
         switch (exceptionCode) {
             case 0:
-                throw new NullPointerException("[Generator]Null pointer exception occurred.");
+                throw new NullPointerException("[Generator]Null pointer exception occurred.["+exceptionCode+"]");
             case 1:
-                throw new IllegalArgumentException("[Generator]Illegal argument exception occurred.");
+                throw new IllegalArgumentException("[Generator]Illegal argument exception occurred.["+exceptionCode+"]");
             case 2:
-                throw new UnsupportedOperationException("[Generator]Unsupported operation exception occurred.");
+                throw new UnsupportedOperationException("[Generator]Unsupported operation exception occurred.["+exceptionCode+"]");
             case 3:
-                throw new ArrayIndexOutOfBoundsException("[Generator]Array index out of bounds exception occurred.");
+                throw new ArrayIndexOutOfBoundsException("[Generator]Array index out of bounds exception occurred.["+exceptionCode+"]");
             case 4:
-                throw new ArithmeticException("[Generator]Arithmetic exception occurred.");
+                throw new ArithmeticException("[Generator]Arithmetic exception occurred.["+exceptionCode+"]");
         }
     }
 }
