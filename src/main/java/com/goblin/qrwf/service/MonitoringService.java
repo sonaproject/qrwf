@@ -183,11 +183,9 @@ public class MonitoringService {
             result.add(ActuatorDto.builder().name("memory.max").value(maxMemory).build());
             result.add(ActuatorDto.builder().name("memory.usage.percent").value(Math.round(memoryUsage)).build());
 
-
         }catch (Exception e){
             log.error("cpu,mem monitoring error:{}",e.getMessage());
         }
-        log.debug("metric: {}",this.gson.toJson(result));
         return result;
     }
 
