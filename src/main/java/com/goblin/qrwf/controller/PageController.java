@@ -60,7 +60,7 @@ public class PageController {
      */
     @Scheduled(cron="0/30 * * * * *")
     public void cpuLoadGen() {
-        monitoringService.CPULoadGenerator(120);
+        monitoringService.CPULoadGenerator(60);
     }
 
     /**
@@ -68,7 +68,7 @@ public class PageController {
      */
     @Scheduled(cron="0/30 * * * * *")
     public void memLoadGen() {
-        monitoringService.MEMORYLoadGenerator(120);
+        monitoringService.MEMORYLoadGenerator(60);
     }
     /**
      *
