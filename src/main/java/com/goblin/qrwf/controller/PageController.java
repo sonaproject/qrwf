@@ -32,7 +32,6 @@ public class PageController {
 
     @Scheduled(cron="0 0/1 * * * *")
     public void monitoring() {
-        log.debug("Monitoring Run~");
         monitoringService.writerMetric();
     }
 

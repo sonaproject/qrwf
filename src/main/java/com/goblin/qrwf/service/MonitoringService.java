@@ -187,7 +187,7 @@ public class MonitoringService {
         }catch (Exception e){
             log.error("cpu,mem monitoring error:{}",e.getMessage());
         }
-        log.debug("metric: {}",this.gson.toJson(result));
+        //log.debug("metric: {}",this.gson.toJson(result));
         return result;
     }
 
