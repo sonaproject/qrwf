@@ -243,7 +243,7 @@ public class MonitoringService {
             byte[] element = new byte[elementSize];
             memoryList.add(element);
             try {
-                Thread.sleep(500);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
             }
         }
