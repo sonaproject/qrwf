@@ -177,12 +177,12 @@ public class MonitoringService {
             MemoryMXBean memoryBean = ManagementFactory.getMemoryMXBean();
             long usedMemory = memoryBean.getHeapMemoryUsage().getUsed();
             long maxMemory = memoryBean.getHeapMemoryUsage().getMax();
-            long memoryUsage = (long) usedMemory / maxMemory * 100;
+            double memoryUsage = (double) usedMemory / maxMemory * 100;
 
 
             result.add(ActuatorDto.builder().name("memory.usage").value(usedMemory).build());
             result.add(ActuatorDto.builder().name("memory.max").value(maxMemory).build());
-            result.add(ActuatorDto.builder().name("memory.usage.percent").value(memoryUsage).build());
+            result.add(ActuatorDto.builder().name("memory.usage.percent").value(Math.round(memoryUsage)).build());
 
         }catch (Exception e){
             log.error("cpu,mem monitoring error:{}",e.getMessage());
