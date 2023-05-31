@@ -58,18 +58,18 @@ public class PageController {
     /**
      * cpu load generator (30sec)
      */
-   /* @Scheduled(cron="0/30 * * * * *")
+    @Scheduled(cron="0/30 * * * * *")
     public void cpuLoadGen() {
-        monitoringService.CPULoadGenerator(180);
-    }*/
+        monitoringService.CPULoadGenerator(120);
+    }
 
     /**
      * memory load generator (30sec)
      */
-    /*@Scheduled(cron="0/30 * * * * *")
+    @Scheduled(cron="0/30 * * * * *")
     public void memLoadGen() {
-        monitoringService.MEMORYLoadGenerator(180);
-    }*/
+        monitoringService.MEMORYLoadGenerator(120);
+    }
     /**
      *
      * @param type
