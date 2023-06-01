@@ -61,14 +61,10 @@
                         </select>
                     </div>
                 </div>
-                <#--<div class="m-3">
+                <div class="m-3">
                     <button class="btn btn-info form-control fs-3" id="runBtn">QR코드 만들기 실행</button>
-                    <div class="btn-group col-12">
-                        <button class="btn btn-warning fs-3" id="cpuLoaderBtn">CPU 부하주기(3분)</button>
-                        <button class="btn btn-danger fs-3" id="memLoaderBtn">Memory 부하주기(3분)</button>
-                    </div>
                     <div class="form-control col-12l fs-4" id="loaderResultdiv"></div>
-                </div>-->
+                </div>
             </div>
             <div class="col-12 d-none" id="printable">
                 <div class="col-12 text-center bold">
