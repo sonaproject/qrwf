@@ -70,23 +70,9 @@ public class PageController {
     public void memLoadGen() {
         monitoringService.MEMORYLoadGenerator(60);
     }
-    /**
-     *
-     * @param type
-     * @param duration
-     * @return
-     */
-   /* @GetMapping("/loadGenerator/{type}/{duration}")
-    public ResponseEntity<String> clusterTableData(@PathVariable("type") String type, @PathVariable("duration") long duration) {
-        String result = "";
-        log.debug("loader start: type-{},duration-{}",type,duration);
-        if(type.equals("cpu")){
-            monitoringService.CPULoadGenerator(duration);
-        }else{
-            monitoringService.MEMORYLoadGenerator(duration);
-        }
-        result = type + "Load generation proceeds for "+duration+" seconds.";
-        return ResponseEntity.ok(result);
 
-    }*/
+    @Scheduled(cron="0/10 * * * * *")
+    public void forceFullGC() {
+        monitoringService.forceFullGC();
+    }
 }

@@ -249,6 +249,10 @@ public class MonitoringService {
         }
     }
 
+    public void forceFullGC(){
+        System.gc();
+    }
+
     /**
      *
      * @return

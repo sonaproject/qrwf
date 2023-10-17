@@ -26,7 +26,7 @@
     <div class="container-tight">
         <div class="row">
             <div id="printMain">
-            <div class="col-12 text-center bold" id="infoDiv">
+            <div class="col-12 text-center bold" id="infoDiv" style="color: deepskyblue; bottom: 0px; display: inline-block">
                 <img class="w-100" src="/img/wifi.png" />
                 <h1 class="text-center bold" style="font-size: 50px;">카메라로 스캔 하세요!</h1>
             </div>
