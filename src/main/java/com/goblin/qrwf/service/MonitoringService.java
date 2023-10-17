@@ -260,13 +260,13 @@ public class MonitoringService {
      *
      */
     public void createFullGc(){
-        List<byte[]> list = new ArrayList<>();
+        List<Object> garbageList = new ArrayList<>();
 
-        for (int i = 0; i < 100; i++) {
-            list.add(new byte[1024 * 1024]);
+        while (true) {
+            garbageList.add(new byte[1024 * 1024]); // 1MB 데이터 추가
 
-            if (i % 10 == 0) {
-                list.subList(0, 5).clear();
+            if (garbageList.size() > 1000) { // 일정 크기 이상이 되면 참조를 끊어서 Old 영역으로 이동시킴
+                garbageList.clear();
             }
         }
     }
