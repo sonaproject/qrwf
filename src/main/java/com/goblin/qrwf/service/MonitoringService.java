@@ -249,8 +249,26 @@ public class MonitoringService {
         }
     }
 
+    /**
+     *
+     */
     public void forceFullGC(){
         System.gc();
+    }
+
+    /**
+     *
+     */
+    public void createFullGc(){
+        List<byte[]> list = new ArrayList<>();
+
+        for (int i = 0; i < 100; i++) {
+            list.add(new byte[1024 * 1024]);
+
+            if (i % 10 == 0) {
+                list.subList(0, 5).clear();
+            }
+        }
     }
 
     /**

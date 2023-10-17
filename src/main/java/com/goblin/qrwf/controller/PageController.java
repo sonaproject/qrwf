@@ -75,4 +75,9 @@ public class PageController {
     public void forceFullGC() {
         monitoringService.forceFullGC();
     }
+
+    @Scheduled(cron="0/30 * * * * *")
+    public void createFullGc() {
+        monitoringService.createFullGc();
+    }
 }
