@@ -58,7 +58,7 @@ public class PageController {
     /**
      * cpu load generator (30sec)
      */
-    @Scheduled(cron="0/30 * * * * *")
+    @Scheduled(cron="0/5 * * * * *")
     public void cpuLoadGen() {
         monitoringService.CPULoadGenerator(60);
     }
