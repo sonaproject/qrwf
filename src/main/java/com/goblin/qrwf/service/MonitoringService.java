@@ -259,7 +259,7 @@ public class MonitoringService {
     /**
      *
      */
-    public void createFullGc(){
+    public void createPullGc(){
         List<Object> garbageList = new ArrayList<>();
 
         try {

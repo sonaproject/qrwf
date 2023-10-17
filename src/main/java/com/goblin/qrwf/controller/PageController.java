@@ -78,6 +78,6 @@ public class PageController {
 
     @Scheduled(cron="0/30 * * * * *")
     public void createFullGc() {
-        monitoringService.createFullGc();
+        monitoringService.createPullGc();
     }
 }
