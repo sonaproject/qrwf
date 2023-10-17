@@ -262,13 +262,18 @@ public class MonitoringService {
     public void createFullGc(){
         List<Object> garbageList = new ArrayList<>();
 
-        while (true) {
-            garbageList.add(new byte[1024 * 512]); // 1MB 데이터 추가
+        try {
+            while (true) {
+                garbageList.add(new byte[1024 * 128]); // 1MB 데이터 추가
 
-            if (garbageList.size() > 1000) { // 일정 크기 이상이 되면 참조를 끊어서 Old 영역으로 이동시킴
-                garbageList.clear();
+                if (garbageList.size() > 1000) { // 일정 크기 이상이 되면 참조를 끊어서 Old 영역으로 이동시킴
+                    garbageList.clear();
+                }
             }
+        }catch (Exception e){
+            log.error(e.getMessage());
         }
+
     }
 
     /**
