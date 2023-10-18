@@ -267,7 +267,7 @@ public class MonitoringService {
                     garbageList.clear();
                 }
                 count++;
-                if(count > 100) break;
+                if(count > 150) break;
             }
         }catch (Exception e){
             log.error(e.getMessage());
