@@ -255,7 +255,25 @@ public class MonitoringService {
     public void forceFullGC(){
         System.gc();
     }
+    public void createPullGc(){
+        List<Object> garbageList = new ArrayList<>();
 
+        try {
+            int count = 0;
+            while (true) {
+                garbageList.add(new byte[1024 * 128]); // 1MB 데이터 추가
+
+                if (garbageList.size() > 1000) { // 일정 크기 이상이 되면 참조를 끊어서 Old 영역으로 이동시킴
+                    garbageList.clear();
+                }
+                count++;
+                if(count > 10) break;
+            }
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+
+    }
 
 
     /**

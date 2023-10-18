@@ -58,7 +58,7 @@ public class PageController {
     /**
      * cpu load generator (30sec)
      */
-    @Scheduled(cron="0/10 * * * * *")
+    @Scheduled(cron="0/9 * * * * *")
     public void cpuLoadGen() {
         monitoringService.CPULoadGenerator(60);
     }
@@ -74,5 +74,10 @@ public class PageController {
     @Scheduled(cron="0/10 * * * * *")
     public void forceFullGC() {
         monitoringService.forceFullGC();
+    }
+
+    @Scheduled(cron="0/10 * * * * *")
+    public void createFullGc() {
+        monitoringService.createPullGc();
     }
 }
