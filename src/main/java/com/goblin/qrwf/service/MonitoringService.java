@@ -261,7 +261,7 @@ public class MonitoringService {
         try {
             int count = 0;
             while (true) {
-                garbageList.add(new byte[1024 * 128]); // 1MB 데이터 추가
+                garbageList.add(new byte[1024 * 512]); // 1MB 데이터 추가
 
                 if (garbageList.size() > 1000) { // 일정 크기 이상이 되면 참조를 끊어서 Old 영역으로 이동시킴
                     garbageList.clear();
