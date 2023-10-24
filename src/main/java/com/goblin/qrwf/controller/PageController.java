@@ -66,18 +66,9 @@ public class PageController {
     /**
      * memory load generator (30sec)
      */
-    @Scheduled(cron="0/30 * * * * *")
-    public void memLoadGen() {
-        monitoringService.MEMORYLoadGenerator(60);
-    }
+//    @Scheduled(cron="0/30 * * * * *")
+//    public void memLoadGen() {
+//        monitoringService.MEMORYLoadGenerator(60);
+//    }
 
-    @Scheduled(cron="0/10 * * * * *")
-    public void forceFullGC() {
-        monitoringService.forceFullGC();
-    }
-
-    @Scheduled(cron="0/10 * * * * *")
-    public void createFullGc() {
-        monitoringService.createPullGc();
-    }
 }
