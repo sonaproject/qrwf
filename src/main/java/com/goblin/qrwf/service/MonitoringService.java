@@ -219,11 +219,16 @@ public class MonitoringService {
     @Async
     public void CPULoadGenerator(long duration) {
         long startTime = System.currentTimeMillis();
-        while (System.currentTimeMillis() - startTime < (duration*1000)) {
-            for (int i = 0; i < 10000; i++) {
-                Math.sqrt(i);
-            }
+        int result = 0;
+        for (int i = 0; i < 50000000; i++) {
+		result += (int) Math.sqrt(result) * Math.sqrt(i);
+		result = result + (int) Math.sqrt(result);
+		result = result - (int) Math.sqrt(result);
         }
+    
+        long endTime = System.currentTimeMillis();
+        long executionTime = endTime - startTime;
+        System.out.println("Execution time: " + executionTime + " milliseconds");
     }
 
     /**
